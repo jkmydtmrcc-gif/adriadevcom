@@ -68,8 +68,8 @@ const container = {
 }
 
 const item = {
-  hidden: { opacity: 0, y: 48 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 1, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export default function Usluge() {
@@ -119,19 +119,19 @@ export default function Usluge() {
         <div className="relative max-w-6xl mx-auto">
           <motion.h2
             className="font-syne font-bold text-2xl md:text-3xl text-text-primary text-center mb-4"
-            initial={{ opacity: 0, y: 36 }}
+            initial={{ opacity: 1, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             Sve usluge na jednom mjestu
           </motion.h2>
           <motion.p
             className="text-text-secondary text-center max-w-2xl mx-auto mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 1, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
           >
             Kliknite ili scrollajte dolje za detaljan opis svake usluge, uključene benefite i cijene.
           </motion.p>
@@ -140,7 +140,7 @@ export default function Usluge() {
             variants={container}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: true, amount: 0.05, margin: '80px' }}
           >
             {services.map((s, i) => (
               <motion.div
@@ -178,9 +178,10 @@ export default function Usluge() {
         <div className="max-w-4xl mx-auto">
           <motion.h2
             className="font-syne font-bold text-xl md:text-2xl text-text-primary text-center mb-10"
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 1, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
           >
             Detaljno o svakoj usluzi
           </motion.h2>
@@ -189,7 +190,7 @@ export default function Usluge() {
             variants={container}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: true, amount: 0.05, margin: '80px' }}
           >
             {services.map((s) => (
               <motion.article
