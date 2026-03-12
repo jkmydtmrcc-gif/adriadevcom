@@ -58,12 +58,12 @@ const services = [
 
 const container = {
   hidden: { opacity: 0 },
-  visible: { transition: { staggerChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 }
 
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 48 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export default function Usluge() {
@@ -78,41 +78,51 @@ export default function Usluge() {
         title="Naše usluge"
         subtitle="Od prezentacijske stranice do web shopa i naprednog SEO-a. Sve što vam treba za uspjeh na internetu — transparentno i bez iznenađenja."
       />
-      <section className="px-4 pb-10">
+      <section className="px-4 pb-12 md:pb-16">
         <div className="max-w-3xl mx-auto">
-          <motion.p
-            className="text-text-secondary text-center leading-relaxed"
-            initial={{ opacity: 0, y: 24 }}
+          <motion.div
+            className="space-y-4 text-center"
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            U nastavku su sve usluge koje nudimo: izrada web stranica (od 299€ s hostingom), web shopovi, booking sustavi za restorane i salone, apartmanske stranice za direktne bookinge te SEO i Google My Business. Za web pakete imate fiksnu cijenu; za SEO i prilagođene projekte cijena je na upit. Svaki projekt prilagodimo vašim potrebama — pošaljite upit i opisat ćemo što možemo ponuditi i za koliko.
-          </motion.p>
+            <p className="text-text-secondary leading-relaxed">
+              U nastavku su sve usluge koje nudimo: izrada web stranica (od 299€ s hostingom), web shopovi, booking sustavi za restorane i salone, apartmanske stranice za direktne bookinge te SEO i Google My Business.
+            </p>
+            <p className="text-text-secondary leading-relaxed">
+              Za web pakete imate fiksnu cijenu; za SEO i prilagođene projekte cijena je na upit. Svaki projekt prilagodimo vašim potrebama — pošaljite upit i opisat ćemo što možemo ponuditi i za koliko.
+            </p>
+          </motion.div>
         </div>
       </section>
-      <section className="py-12 md:py-20 px-4">
+      <section className="py-8 md:py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            className="space-y-24"
+            className="space-y-8 md:space-y-10"
             variants={container}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, margin: '-60px' }}
           >
-            {services.map((s, i) => (
+            {services.map((s) => (
               <motion.article
                 key={s.title}
                 variants={item}
-                className="rounded-2xl bg-elevated border border-border p-8 md:p-10 hover:border-accent/40 transition-colors"
+                className="group rounded-2xl bg-elevated border border-border p-6 md:p-8 lg:p-10 hover:border-accent/50 transition-colors duration-300"
+                whileHover={{ boxShadow: '0 0 40px rgba(108, 92, 231, 0.2)' }}
               >
-                <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
-                  <div className="w-14 h-14 rounded-xl bg-accent/20 flex items-center justify-center text-accent shrink-0">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-5 md:gap-8">
+                  <div className="w-14 h-14 rounded-xl bg-accent/20 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent/30 transition-colors">
                     <s.icon size={28} />
                   </div>
-                  <div className="flex-1">
-                    <h2 className="font-syne font-bold text-2xl md:text-3xl text-text-primary mb-3">{s.title}</h2>
-                    <p className="text-text-secondary leading-relaxed mb-6">{s.desc}</p>
+                  <div className="flex-1 min-w-0">
+                    <h2 className="font-syne font-bold text-xl md:text-2xl lg:text-3xl text-text-primary mb-3">
+                      {s.title}
+                    </h2>
+                    <p className="text-text-secondary leading-relaxed mb-5">
+                      {s.desc}
+                    </p>
                     <ul className="space-y-2 mb-6">
                       {s.benefits.map((b, j) => (
                         <li key={j} className="flex items-center gap-2 text-text-secondary text-sm">
@@ -122,12 +132,14 @@ export default function Usluge() {
                       ))}
                     </ul>
                     <div className="flex flex-wrap items-center gap-4">
-                      <span className="font-mono text-xl text-accent-light font-semibold">{s.fromPrice === 'na upit' ? 'Na upit' : `od ${s.fromPrice}€`}</span>
+                      <span className="font-mono text-lg md:text-xl text-accent-light font-semibold">
+                        {s.fromPrice === 'na upit' ? 'Na upit' : `od ${s.fromPrice}€`}
+                      </span>
                       <Link
                         to={s.href}
-                        className="inline-flex items-center gap-1 text-accent-light font-medium text-sm hover:underline"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-accent/20 text-accent-light font-medium text-sm hover:bg-accent hover:text-white transition-colors duration-200"
                       >
-                        Zatražite ponudu <ArrowRight size={16} />
+                        Zatražite ponudu <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
                   </div>
