@@ -155,7 +155,7 @@ export default function Usluge() {
               >
                 <motion.div
                   className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent mb-4 group-hover:bg-accent/30 transition-colors"
-                  whileHover={{ rotate: [0, -5, 5, 0], transition: { duration: 0.4 } }
+                  whileHover={{ rotate: [0, -5, 5, 0], transition: { duration: 0.4 } }}
                 >
                   <s.icon size={24} />
                 </motion.div>
