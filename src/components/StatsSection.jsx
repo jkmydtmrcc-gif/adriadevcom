@@ -3,9 +3,9 @@ import { motion, useInView } from 'framer-motion'
 
 const stats = [
   { value: 50, suffix: '+', label: 'Zadovoljnih klijenata', duration: 2 },
-  { value: 2, suffix: '-3', label: 'Tjedna isporuke', duration: 1.5 },
+  { value: 2, suffix: '-3', label: 'Tjedna isporuke', duration: 2 },
   { value: 100, suffix: '%', label: 'Zadovoljstvo ili vraćamo novac', duration: 2 },
-  { value: 24, suffix: '/7', label: 'Podrška', duration: 1.5 },
+  { value: 24, suffix: '/7', label: 'Podrška', duration: 2 },
 ]
 
 function AnimatedNumber({ value, suffix, duration }) {
@@ -15,14 +15,15 @@ function AnimatedNumber({ value, suffix, duration }) {
 
   useEffect(() => {
     if (!inView) return
-    let start = 0
     const end = value
     const startTime = performance.now()
+    const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t))
     const step = (timestamp) => {
       const elapsed = (timestamp - startTime) / 1000
-      const progress = Math.min(elapsed / duration, 1)
+      const t = Math.min(elapsed / duration, 1)
+      const progress = easeOutExpo(t)
       setCount(Math.floor(progress * end))
-      if (progress < 1) requestAnimationFrame(step)
+      if (t < 1) requestAnimationFrame(step)
     }
     requestAnimationFrame(step)
   }, [inView, value, duration])
@@ -53,10 +54,10 @@ export default function StatsSection() {
               key={i}
               className="rounded-2xl bg-elevated border border-border p-6 md:p-8 text-center hover:border-accent/50 transition-all duration-300"
               variants={{
-                hidden: { opacity: 0, y: 64 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
               }}
-              whileHover={{ scale: 1.06, boxShadow: '0 0 45px rgba(108, 92, 231, 0.35)' }}
+              whileHover={{ y: -6, boxShadow: '0 20px 60px rgba(108, 92, 231, 0.25)', transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
             >
               <div className="text-3xl md:text-4xl lg:text-5xl text-accent-light mb-2">
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} duration={stat.duration} />

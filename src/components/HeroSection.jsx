@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronDown, Check } from 'lucide-react'
+import WhatsAppIcon from './WhatsAppIcon'
 
 const phrases = [
   'Napravimo vašu web stranicu',
@@ -33,7 +34,7 @@ export default function HeroSection() {
           }
         }
       },
-      isDeleting ? 50 : 80
+      isDeleting ? 60 : 80
     )
     return () => clearTimeout(timeout)
   }, [displayText, isDeleting, phraseIndex])
@@ -46,25 +47,25 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-24 pb-16 px-4">
-      {/* Floating blobs - jače animacije */}
+      {/* Floating blobs — sporo, organično */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute w-[550px] h-[550px] rounded-full opacity-25 blur-3xl -top-40 -left-40"
           style={{ background: 'linear-gradient(135deg, #6C5CE7, #A29BFE)' }}
-          animate={{ y: [0, 80, 0], x: [0, 50, 0], scale: [1, 1.15, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, 60, 0], x: [0, 30, 0], scale: [1, 1.08, 1], rotate: [0, 5, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
         />
         <motion.div
           className="absolute w-[450px] h-[450px] rounded-full opacity-20 blur-3xl top-1/2 right-0"
           style={{ background: 'linear-gradient(135deg, #A29BFE, #6C5CE7)' }}
-          animate={{ y: [0, -60, 0], x: [0, -40, 0], scale: [1.1, 1, 1.1] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, -50, 0], x: [0, -25, 0], scale: [1.05, 1, 1.05], rotate: [0, -4, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
         />
         <motion.div
           className="absolute w-[350px] h-[350px] rounded-full opacity-15 blur-3xl bottom-20 left-1/3"
           style={{ background: '#6C5CE7' }}
-          animate={{ y: [0, 50, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, 40, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
 
@@ -73,7 +74,7 @@ export default function HeroSection() {
           className="text-accent-light font-medium text-sm md:text-base mb-4 uppercase tracking-wider"
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           Web stranice i SEO za hrvatske biznise
         </motion.p>
@@ -81,18 +82,18 @@ export default function HeroSection() {
           className="font-syne font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-text-primary leading-tight mb-6 min-h-[1.2em]"
           initial={{ opacity: 0, y: 56 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
             {displayText}
           </span>
-          <span className="animate-pulse">|</span>
+          <span className="animate-pulse" aria-hidden>|</span>
         </motion.h1>
         <motion.p
           className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
           Moderna web stranica i SEO optimizacija za vaš biznis. Vidite rezultat prije nego platite.
         </motion.p>
@@ -100,7 +101,7 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center mb-14"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <Link
             to="/cijene"
@@ -138,12 +139,26 @@ export default function HeroSection() {
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
           className="text-text-muted"
         >
           <ChevronDown size={32} />
         </motion.div>
       </motion.div>
+
+      {/* Floating WhatsApp badge */}
+      <motion.a
+        href="https://wa.me/385976425423"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.5 }}
+        className="fixed right-4 sm:right-6 bottom-20 sm:bottom-24 z-40 flex items-center gap-2 bg-[#25D366] text-white px-4 py-2.5 rounded-full shadow-lg hover:bg-[#20c05a] transition-colors text-sm font-medium"
+      >
+        <WhatsAppIcon className="w-4 h-4 shrink-0" />
+        <span className="hidden sm:inline">Pišite nam</span>
+      </motion.a>
     </section>
   )
 }

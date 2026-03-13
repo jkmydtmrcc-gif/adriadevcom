@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import PageHero from '../components/PageHero'
-import { Mail, MessageCircle, Clock, MapPin } from 'lucide-react'
+import { Mail, Clock, MapPin } from 'lucide-react'
+import WhatsAppIcon from '../components/WhatsAppIcon'
 
 const servicesOptions = [
   'Izrada web stranice',
@@ -164,43 +165,46 @@ export default function Kontakt() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
+              className="space-y-4"
             >
               <h2 className="font-syne font-bold text-2xl text-text-primary mb-6">Kontakt podaci</h2>
-              <ul className="space-y-6 mb-8">
-                <li className="flex items-start gap-4">
-                  <Mail className="text-accent shrink-0 mt-0.5" size={22} />
-                  <div>
-                    <p className="text-text-secondary text-sm">Email</p>
-                    <a href="mailto:kontakt@adriadev.com" className="text-text-primary font-medium hover:text-accent-light">
-                      kontakt@adriadev.com
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <MessageCircle className="text-accent shrink-0 mt-0.5" size={22} />
-                  <div>
-                    <p className="text-text-secondary text-sm">WhatsApp</p>
-                    <a href="https://wa.me/385991234567" target="_blank" rel="noopener noreferrer" className="text-text-primary font-medium hover:text-accent-light">
-                      +385 99 123 4567
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <Clock className="text-accent shrink-0 mt-0.5" size={22} />
-                  <div>
-                    <p className="text-text-secondary text-sm">Radno vrijeme</p>
-                    <p className="text-text-primary">Pon – Pet: 9–17h</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <MapPin className="text-accent shrink-0 mt-0.5" size={22} />
-                  <div>
-                    <p className="text-text-secondary text-sm">Lokacija</p>
-                    <p className="text-text-primary">Hrvatska — radimo s klijentima diljem zemlje</p>
-                  </div>
-                </li>
-              </ul>
-              <div className="rounded-2xl bg-elevated border border-border aspect-video flex items-center justify-center text-text-muted text-sm">
+              <a href="mailto:kontakt@adriadev.com" className="flex items-center gap-3 p-4 bg-surface border border-border rounded-xl hover:border-accent transition-colors w-full text-left">
+                <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 text-accent" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-text-secondary">Email</p>
+                  <p className="text-text-primary font-medium truncate">kontakt@adriadev.com</p>
+                </div>
+              </a>
+              <a href="https://wa.me/385976425423" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-surface border border-border rounded-xl hover:border-[#25D366] transition-colors w-full text-left">
+                <div className="w-10 h-10 bg-[#25D366]/10 rounded-lg flex items-center justify-center shrink-0">
+                  <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-text-secondary">WhatsApp</p>
+                  <p className="text-text-primary font-medium">+385 97 642 5423</p>
+                </div>
+              </a>
+              <div className="flex items-center gap-3 p-4 bg-surface border border-border rounded-xl">
+                <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <p className="text-xs text-text-secondary">Radno vrijeme</p>
+                  <p className="text-text-primary font-medium">Pon–Pet: 9:00–18:00</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4 bg-surface border border-border rounded-xl">
+                <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <p className="text-xs text-text-secondary">Lokacija</p>
+                  <p className="text-text-primary font-medium">Hrvatska — radimo s klijentima diljem zemlje</p>
+                </div>
+              </div>
+              <div className="rounded-2xl bg-elevated border border-border aspect-video flex items-center justify-center text-text-muted text-sm mt-6">
                 [ Google Maps placeholder ]
               </div>
             </motion.div>

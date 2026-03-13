@@ -54,5 +54,6 @@ h1, h2, h3, h4, h5, h6 {
   background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
   transform: translate(-50%, -50%);
   z-index: 9999;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+

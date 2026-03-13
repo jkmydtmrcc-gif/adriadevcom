@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import WhatsAppIcon from './WhatsAppIcon'
 
 const navLinks = [
   { to: '/', label: 'Početna' },
@@ -28,12 +29,13 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-surface/80 backdrop-blur-xl border-b border-border' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[400ms] ${
+          scrolled ? 'bg-surface/80 backdrop-blur-xl border-b border-border shadow-lg shadow-black/10' : 'bg-transparent'
         }`}
+        style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -63,7 +65,16 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-3">
+              <a
+                href="https://wa.me/385976425423"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-[#25D366] hover:text-[#20c05a] text-sm font-medium transition-colors"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                +385 97 642 5423
+              </a>
               <Link
                 to="/kontakt"
                 className="inline-flex items-center px-5 py-2.5 rounded-full bg-accent text-white font-medium text-sm hover:bg-accent-light hover:shadow-accent-glow transition-all duration-200"
@@ -126,9 +137,18 @@ export default function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
+                <a
+                  href="https://wa.me/385976425423"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex justify-center items-center gap-2 px-5 py-3 rounded-full bg-[#25D366] text-white font-medium"
+                >
+                  <WhatsAppIcon className="w-4 h-4" />
+                  WhatsApp +385 97 642 5423
+                </a>
                 <Link
                   to="/kontakt"
-                  className="mt-4 inline-flex justify-center items-center px-5 py-3 rounded-full bg-accent text-white font-medium"
+                  className="mt-2 inline-flex justify-center items-center px-5 py-3 rounded-full bg-accent text-white font-medium"
                 >
                   Besplatna ponuda
                 </Link>

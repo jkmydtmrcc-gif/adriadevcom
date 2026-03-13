@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Instagram, Linkedin, Facebook } from 'lucide-react'
+import { Instagram, Linkedin, Facebook, Phone } from 'lucide-react'
+import WhatsAppIcon from './WhatsAppIcon'
 
 const footerLinks = {
   usluge: [
@@ -94,14 +95,21 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h3 className="font-syne font-semibold text-text-primary mb-4">Kontakt</h3>
-            <ul className="space-y-2 text-text-secondary text-sm">
+            <ul className="space-y-3 text-text-secondary text-sm">
               <li>
-                <a href="mailto:kontakt@adriadev.com" className="hover:text-accent-light transition-colors">
+                <a href="mailto:kontakt@adriadev.com" className="flex items-center gap-2 hover:text-text-primary transition-colors">
                   kontakt@adriadev.com
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/385991234567" target="_blank" rel="noopener noreferrer" className="hover:text-accent-light transition-colors">
+                <a href="https://wa.me/385976425423" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-text-primary transition-colors">
+                  <Phone className="w-4 h-4 shrink-0" />
+                  +385 97 642 5423
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/385976425423" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#8888AA] hover:text-[#25D366] transition-colors">
+                  <WhatsAppIcon className="w-4 h-4 shrink-0" />
                   WhatsApp
                 </a>
               </li>

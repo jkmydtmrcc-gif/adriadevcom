@@ -37,6 +37,12 @@ export default function CTASection() {
         >
           Kontaktirajte nas danas <ArrowRight size={20} />
         </Link>
+        <p className="text-text-secondary text-sm mt-4">
+          Ili nas kontaktirajte direktno:{' '}
+          <a href="https://wa.me/385976425423" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">
+            WhatsApp +385 97 642 5423
+          </a>
+        </p>
       </motion.div>
     </section>
   )

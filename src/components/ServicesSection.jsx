@@ -43,15 +43,11 @@ const services = [
 
 const container = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 }
-
 const item = {
-  hidden: { opacity: 0, y: 56 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 }
 
 export default function ServicesSection() {
@@ -63,7 +59,7 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <h2 className="font-syne font-bold text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4">
             Što radimo za vas
@@ -86,9 +82,9 @@ export default function ServicesSection() {
                 <motion.div
                   className="h-full rounded-2xl bg-elevated border border-border p-6 md:p-8 flex flex-col hover:border-accent/50 transition-colors group"
                   whileHover={{
-                    scale: 1.05,
-                    boxShadow: '0 0 50px rgba(108, 92, 231, 0.4)',
-                    transition: { duration: 0.25, ease: 'easeOut' },
+                    y: -6,
+                    boxShadow: '0 20px 60px rgba(108, 92, 231, 0.25)',
+                    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
                   }}
                 >
                   <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent mb-4 group-hover:bg-accent/30 transition-colors">
