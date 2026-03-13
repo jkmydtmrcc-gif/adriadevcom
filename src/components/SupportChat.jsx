@@ -5,7 +5,6 @@ import { MessageCircle, X, Send } from 'lucide-react'
 
 const SESSION_ID = `session_${Date.now()}_${Math.random().toString(36).slice(2)}`
 const MAX_SESSIONS = 50
-const API_BASE = 'https://adriadev.site/api'
 
 const SYSTEM_PROMPT = `Ti si ljubazni AI asistent za web agenciju Adria Dev iz Hrvatske.
 
@@ -64,23 +63,6 @@ function saveToLocalStorage(messages) {
     localStorage.setItem('adria_chat_sessions', JSON.stringify(sessions))
   } catch (e) {
     console.warn('Chat localStorage save failed', e)
-  }
-}
-
-async function sendToBackend(messages) {
-  try {
-    await fetch(`${API_BASE}/chat-logs`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sessionId: SESSION_ID,
-        messages,
-        userAgent: navigator.userAgent,
-        timestamp: new Date().toISOString(),
-      }),
-    })
-  } catch (e) {
-    // tiho
   }
 }
 
@@ -146,7 +128,6 @@ export default function SupportChat() {
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
       const updated = [...newMessages, { role: 'assistant', content: reply }]
       saveToLocalStorage(updated)
-      sendToBackend(updated)
     } catch (e) {
       setMessages((prev) => [
         ...prev,
@@ -309,7 +290,7 @@ export default function SupportChat() {
                   <Send className="w-5 h-5" />
                 </motion.button>
               </div>
-              <p className="text-[10px] text-text-muted mt-1.5 text-center">Powered by AI</p>
+              <p className="text-[10px] text-text-muted mt-1.5 text-center">Powered by Adria Dev AI</p>
             </div>
           </motion.div>
         )}

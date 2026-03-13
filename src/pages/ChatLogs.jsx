@@ -4,7 +4,14 @@ import { motion } from 'framer-motion'
 import { MessageSquare, Lock, Eye, Clock, User, Bot } from 'lucide-react'
 
 const CORRECT_PASSWORD = 'AdriaDev2025!'
-const API_BASE = 'https://adriadev.site/api'
+
+function getSessions() {
+  try {
+    return JSON.parse(localStorage.getItem('adria_chat_sessions') || '[]')
+  } catch {
+    return []
+  }
+}
 
 export default function ChatLogs() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -12,7 +19,6 @@ export default function ChatLogs() {
   const [error, setError] = useState('')
   const [logs, setLogs] = useState([])
   const [selectedLog, setSelectedLog] = useState(null)
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const saved = sessionStorage.getItem('adria_admin_auth')
@@ -20,7 +26,7 @@ export default function ChatLogs() {
   }, [])
 
   useEffect(() => {
-    if (isLoggedIn) fetchLogs()
+    if (isLoggedIn) setLogs(getSessions())
   }, [isLoggedIn])
 
   const handleLogin = (e) => {
@@ -35,28 +41,7 @@ export default function ChatLogs() {
     }
   }
 
-  const fetchLogs = async () => {
-    setLoading(true)
-    try {
-      const res = await fetch(`${API_BASE}/chat-logs`)
-      const data = await res.json()
-      setLogs(Array.isArray(data) ? data : [])
-    } catch (e) {
-      console.error('Failed to fetch logs:', e)
-      setLogs([])
-    }
-    setLoading(false)
-  }
-
-  const fetchSession = async (sessionId) => {
-    try {
-      const res = await fetch(`${API_BASE}/chat-logs/${sessionId}`)
-      const data = await res.json()
-      setSelectedLog(data)
-    } catch (e) {
-      console.error('Failed to fetch session:', e)
-    }
-  }
+  const refreshLogs = () => setLogs(getSessions())
 
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleString('hr-HR', {
@@ -131,7 +116,7 @@ export default function ChatLogs() {
         </div>
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           <button
-            onClick={fetchLogs}
+            onClick={refreshLogs}
             className="text-text-secondary hover:text-text-primary text-sm transition-colors"
           >
             Osvježi
@@ -153,9 +138,7 @@ export default function ChatLogs() {
 
       <div className="flex flex-col lg:flex-row h-[calc(100vh-65px)] lg:h-[calc(100vh-57px)]">
         <div className="w-full lg:w-96 border-b lg:border-b-0 lg:border-r border-border overflow-y-auto flex-shrink-0 max-h-[40vh] lg:max-h-none">
-          {loading ? (
-            <div className="p-6 text-center text-text-secondary">Učitavam...</div>
-          ) : logs.length === 0 ? (
+          {logs.length === 0 ? (
             <div className="p-6 text-center text-text-secondary">
               <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-30" />
               <p>Još nema razgovora</p>
@@ -164,10 +147,10 @@ export default function ChatLogs() {
             <div className="divide-y divide-border">
               {logs.map((log) => (
                 <motion.div
-                  key={log.session_id}
-                  onClick={() => fetchSession(log.session_id)}
+                  key={log.id}
+                  onClick={() => setSelectedLog(log)}
                   className={`p-4 cursor-pointer hover:bg-surface transition-colors ${
-                    selectedLog?.session_id === log.session_id
+                    selectedLog?.id === log.id
                       ? 'bg-surface border-l-0 lg:border-l-2 border-accent'
                       : ''
                   }`}
@@ -175,15 +158,15 @@ export default function ChatLogs() {
                 >
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <p className="text-sm font-medium line-clamp-2 sm:line-clamp-1 text-text-primary">
-                      {log.first_message || 'Razgovor bez poruke'}
+                      {log.firstMessage || 'Razgovor bez poruke'}
                     </p>
                     <span className="text-xs text-text-muted whitespace-nowrap shrink-0">
-                      {log.message_count} msg
+                      {log.messageCount} msg
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-text-muted">
                     <Clock className="w-3 h-3 shrink-0" />
-                    <span>{formatDate(log.updated_at)}</span>
+                    <span>{formatDate(log.timestamp)}</span>
                   </div>
                 </motion.div>
               ))}
@@ -205,15 +188,11 @@ export default function ChatLogs() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                   <div>
                     <span className="text-text-secondary">Datum: </span>
-                    <span className="text-text-primary">{formatDate(selectedLog.created_at)}</span>
+                    <span className="text-text-primary">{formatDate(selectedLog.timestamp)}</span>
                   </div>
                   <div>
                     <span className="text-text-secondary">Poruka: </span>
-                    <span className="text-text-primary">{selectedLog.message_count}</span>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <span className="text-text-secondary">IP: </span>
-                    <span className="text-text-primary font-mono text-xs break-all">{selectedLog.ip_address}</span>
+                    <span className="text-text-primary">{selectedLog.messageCount}</span>
                   </div>
                 </div>
               </div>
